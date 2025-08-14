@@ -1,75 +1,74 @@
 class Bank {
-  constructor(bankName) {
+  constructor(bankName, member) {
     this.bankName = bankName;
-    this.listMemberPlatinum = [];
-    this.listMemberSilver =[];
-  }
+    this.balance = member.balance;
+    ths
 
-  register(person, memberType, nominal) {
-    this.enrolledMembers.push(person);
-    if(this.memberType === "Silver") this.listMemberSilver.push(memberType);
-    else if(this.memberName === "Platinum") this.listMemberPlatinum(memberType);
-    else console.log ("Not Valid")
+  
+  }
+  register(person, memberType, nominal){
+
+    balance += nominal;
+    return (`Selamat datang ke ${this.bankName}, Nadia. Nomor Akun anda adalah ${this.accountNumber}. Total saldo adalah ${this.balance}`)
   }
 }
+
 
 class Person {
   constructor(name) {
     this.name = name;
-    bankAccount = null;
+    this.member = null;
   }
 }
 
 class Member {
-  constructor(memberName, accountNumber, minimumBalance, balance){
-  this.memberName = memberName,
-  this.accountNumber = accountNumber,
-  this.minimumBalance = minimumBalance,
-  this.balance = balance,
-  this.transactions = [];
-  this.type = "Silver" || "Platinum";
+  constructor(person, accountNumber) {
+    this.name = person.name;
+    this.accountNumber = accountNumber;
+    this.transactions = [];
+    this.balance = 0;
   }
-  credit(){
 
-  };
-  debit(){
-
-  };
-  transfer(){
+  credit(nominal) {
+    if (nominal < 50000) {
+      console.log("Belum memenuhi minimal uang yang dapat disetor");
+      return;
+    }
+    balance
     
-  };
+  }
+
+  debet(nominal, note) {
+    if (nominal > balances) {
+      console.info("Saldo anda tidak cukup");
+    } else if (nominal - balance < 50000) {
+      console.info("Saldo minimum anda tidak terpenuhi untuk melakukan transaksi");
+    }
+  }
+
+  transfer(){
+
+  }
 
 }
 
 class Platinum extends Member {
-  constructor(minimumBalance) {
-    this.minimumBalance = 500000;
-  }
-  credit()
+  constructor() {}
 }
-class Silver extends Member {
-  constructor() {
 
-  }
+class Silver extends Member {
+  constructor() {}
 }
 
 class Transaction {
-  constructor(person) {
-    
-  }
-  transfer(){
-
-  }
-
-  credit(){
-
-  }
-
-  debet(){
-
-  }
-
+  constructor() {}
 }
+function generateId() {
+  return Math.floor(Math.random() * 900000) + 100000;
+}
+
+
+
 
 // TESTCASE
 // TIDAK BOLEH MENGUBAH CODE DI BAWAH INI
@@ -111,7 +110,7 @@ nadiaAccount.transfer(semmiAccount, 1000000);
 console.log(semmiAccount);
 // Silver {
 //   memberName: 'Semmi Verian',
-//   this.: 1319650,
+//   accountNumber: 1319650,
 //   minimumBalance: 10000,
 //   balance: 10100000,
 //   transactions: [
