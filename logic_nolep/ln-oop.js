@@ -1,16 +1,25 @@
 class Bank {
   constructor(bankName, member) {
     this.bankName = bankName;
-    this.balance = member.balance;
-    ths
+    // this.balance = member.balance;
+    
 
   
   }
-  register(person, memberType, nominal){
-
-    balance += nominal;
-    return (`Selamat datang ke ${this.bankName}, Nadia. Nomor Akun anda adalah ${this.accountNumber}. Total saldo adalah ${this.balance}`)
-  }
+  register(person, memberType, nominal, platinum){
+    if(memberType === "platinum"){
+      if (nominal > platinum.minimumBalance){
+        balance += nominal;
+        
+        console.log(`Selamat datang ke ${bankName}, ${person.name}. Nomor Akun anda adalah ${accountNumber}. Total saldo adalah ${platinum.balance}`)
+      } else
+        console.log("Saldo awal kurang dari minimum saldo yang ditentukan")
+    } else if(memberType === "silver"){
+      if (nominal > silver.minimumBalance){
+        console.log(`Selamat datang ke ${bankName}, ${person.name}. Nomor Akun anda adalah ${accountNumber}. Total saldo adalah ${silver.balance}`)
+      } else
+        console.log("Saldo awal kurang dari minimum saldo yang ditentukan")
+   } 
 }
 
 
@@ -23,10 +32,10 @@ class Person {
 
 class Member {
   constructor(person, accountNumber) {
-    this.name = person.name;
+    this.memberName = person.name;
     this.accountNumber = accountNumber;
     this.transactions = [];
-    this.balance = 0;
+    
   }
 
   credit(nominal) {
@@ -53,15 +62,32 @@ class Member {
 }
 
 class Platinum extends Member {
-  constructor() {}
+  constructor(minimumBalance){
+    super(memberName, accountNumber)
+    this.minimumBalance = 50000;
+    this.balance = 0;
+    super(transactions)
+    type = 'platinum';
+  }
 }
 
 class Silver extends Member {
-  constructor() {}
+  constructor(){
+    super(memberName, accountNumber)
+    this.minimumBalance = 10000;
+    this.balance = 0;
+    super(transactions)
+    type = 'silver';
+  }
 }
 
 class Transaction {
-  constructor() {}
+  constructor(nominal, status, note){
+    this.nominal = nominal;
+    this.status = status;
+    this.date = new Date();
+    this.note = note;
+  }
 }
 function generateId() {
   return Math.floor(Math.random() * 900000) + 100000;
@@ -84,30 +110,30 @@ yudhistiraBank.register(nadia, "platinum", 54000);
 let nadiaAccount = nadia.bankAccount;
 
 /* PASTIKAN BAHWA SALDO SELALU BERKURANG ATAU BERTAMBAH UNTUK SETIAP TRANSAKSI */
-nadiaAccount.credit(300000);
-// Anda sukses menyimpan uang ke dalam bank.
+// nadiaAccount.credit(300000);
+// // Anda sukses menyimpan uang ke dalam bank.
 
-nadiaAccount.credit(1000);
-// Belum memenuhi minimal uang yang dapat di setor
+// nadiaAccount.credit(1000);
+// // Belum memenuhi minimal uang yang dapat di setor
 
-nadiaAccount.debet(200000, "Beli Keyboard");
-// Anda sukses menarik uang dari bank
+// nadiaAccount.debet(200000, "Beli Keyboard");
+// // Anda sukses menarik uang dari bank
 
-nadiaAccount.debet(130000, "Beli Keyboard Lagi");
-// Saldo minimum anda tidak terpenuhi untuk melakukan transaksi.
-nadiaAccount.debet(600000, "Bisa gak ya lebih besar dari balance ? ");
-// Saldo anda tidak cukup
+// nadiaAccount.debet(130000, "Beli Keyboard Lagi");
+// // Saldo minimum anda tidak terpenuhi untuk melakukan transaksi.
+// nadiaAccount.debet(600000, "Bisa gak ya lebih besar dari balance ? ");
+// // Saldo anda tidak cukup
 
-let semmi = new Person("Semmi Verian");
-yudhistiraBank.register(semmi, "silver", 10000000);
-let semmiAccount = semmi.bankAccount;
+// let semmi = new Person("Semmi Verian");
+// yudhistiraBank.register(semmi, "silver", 10000000);
+// let semmiAccount = semmi.bankAccount;
 
-nadiaAccount.transfer(semmiAccount, 100000);
-// Anda sukses transfer ke Semmi Verian
-nadiaAccount.transfer(semmiAccount, 1000000);
-// Anda gagal transfer ke Semmi Verian
+// nadiaAccount.transfer(semmiAccount, 100000);
+// // Anda sukses transfer ke Semmi Verian
+// nadiaAccount.transfer(semmiAccount, 1000000);
+// // Anda gagal transfer ke Semmi Verian
 
-console.log(semmiAccount);
+// console.log(semmiAccount);
 // Silver {
 //   memberName: 'Semmi Verian',
 //   accountNumber: 1319650,
