@@ -1,26 +1,29 @@
 class Bank {
-  constructor(bankName, member) {
+  constructor(bankName, member, platinum
+
+  ) {
     this.bankName = bankName;
     // this.balance = member.balance;
     
 
   
   }
-  register(person, memberType, nominal, platinum){
+  register(person, memberType, nominal){
     if(memberType === "platinum"){
-      if (nominal > platinum.minimumBalance){
+      if (nominal > Platinum.minimumBalance){
         balance += nominal;
-        
+        member.person = new Platinum()
         console.log(`Selamat datang ke ${bankName}, ${person.name}. Nomor Akun anda adalah ${accountNumber}. Total saldo adalah ${platinum.balance}`)
       } else
         console.log("Saldo awal kurang dari minimum saldo yang ditentukan")
     } else if(memberType === "silver"){
-      if (nominal > silver.minimumBalance){
+      if (nominal > Silver.minimumBalance){
         console.log(`Selamat datang ke ${bankName}, ${person.name}. Nomor Akun anda adalah ${accountNumber}. Total saldo adalah ${silver.balance}`)
       } else
         console.log("Saldo awal kurang dari minimum saldo yang ditentukan")
-   } 
-}
+   }
+  }
+
 
 
 class Person {
