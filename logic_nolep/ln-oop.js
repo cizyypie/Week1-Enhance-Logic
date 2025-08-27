@@ -7,16 +7,17 @@ class Bank {
     const id = generateId();
     if (memberType === "platinum") {
       if (nominal >= Platinum.minimumBalance) {
-        person.member = new Platinum(person, id, nominal);
-        person.bankAccount = person.member;
-        console.log(`Selamat datang ke ${this.bankName}, ${person.name}. Nomor Akun anda adalah ${id}. Total saldo adalah ${person.member.balance}`);
+        person.bankAccount = new Platinum(person, id, nominal);;
+        console.log(
+          `Selamat datang ke ${this.bankName}, ${person.name}. Nomor Akun anda adalah ${id}. Total saldo adalah ${person.bankAccount.balance}`
+        );
       } else
         console.log("Saldo awal kurang dari minimum saldo yang ditentukan");
     } else if (memberType === "silver") {
       if (nominal >= Silver.minimumBalance) {
-        person.member = new Silver(person, id, nominal);
-        person.bankAccount = person.member;
-        console.log(`Selamat datang ke ${this.bankName}, ${person.name}. Nomor Akun anda adalah ${id}. Total saldo adalah ${person.member.balance}`
+        person.bankAccount = new Silver(person, id, nominal);
+        console.log(
+          `Selamat datang ke ${this.bankName}, ${person.name}. Nomor Akun anda adalah ${id}. Total saldo adalah ${person.bankAccount.balance}`
         );
       } else
         console.log("Saldo awal kurang dari minimum saldo yang ditentukan");
@@ -27,7 +28,7 @@ class Bank {
 class Person {
   constructor(name) {
     this.name = name;
-    this.member = null;
+    this.bankAccount = null;
   }
 }
 
@@ -35,6 +36,7 @@ class Member {
   constructor(person, accountNumber, nominal) {
     this.memberName = person.name;
     this.accountNumber = accountNumber;
+    this.minimumBalance = 0;
     this.balance = nominal;
     this.transactions = [];
   }
@@ -63,19 +65,23 @@ class Member {
     }
   }
 
-  transfer(target, nominal){
-    if(nominal > this.balance || this.balance - nominal < 50000){
-       console.log(`Anda gagal transfer ke ${target.memberName}`);
+  transfer(target, nominal) {
+    if (nominal > this.balance || this.balance - nominal < 50000) {
+      console.log(`Anda gagal transfer ke ${target.memberName}`);
       return;
     }
     this.balance -= nominal;
     target.balance += nominal;
-    
+
     this.transactions.push(
       new Transaction(nominal, "debet", `transfer ke akun ${target.memberName}`)
     );
     target.transactions.push(
-      new Transaction(nominal, "credit", `transfer dari akun ${this.memberName}`)
+      new Transaction(
+        nominal,
+        "credit",
+        `transfer dari akun ${this.memberName}`
+      )
     );
 
     console.log(`Anda sukses transfer ke ${target.memberName}`);
@@ -83,9 +89,9 @@ class Member {
 }
 
 class Platinum extends Member {
-  constructor(person, accountNumber, nominal, transactions) {
+  constructor(person, accountNumber, nominal) {
     super(person, accountNumber, nominal);
-    this.minimumBalance = 50000;
+    this.minimumBalance = Platinum.minimumBalance;
     this.type = "platinum";
   }
 
@@ -93,9 +99,9 @@ class Platinum extends Member {
 }
 
 class Silver extends Member {
-  constructor(person, accountNumber, nominal, transactions) {
-    super(person, accountNumber, nominal, transactions);
-    this.minimumBalance = 10000;
+  constructor(person, accountNumber, nominal) {
+    super(person, accountNumber, nominal);
+    this.minimumBalance = Silver.minimumBalance;
     this.type = "silver";
   }
 
